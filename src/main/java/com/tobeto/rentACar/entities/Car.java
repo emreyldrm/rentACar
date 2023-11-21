@@ -1,12 +1,17 @@
 package com.tobeto.rentACar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Table(name = "cars")
 @Entity
+@Getter
+@Setter
 public class Car {
     @Id
     @Column(name = "id")
@@ -29,6 +34,7 @@ public class Car {
     private Situation situation;
 
     @OneToMany(mappedBy = "car")
+    @JsonIgnore
     private List<Rent> rents;
 
 }

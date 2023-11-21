@@ -1,5 +1,6 @@
 package com.tobeto.rentACar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,5 +16,6 @@ public class PaymentMethod {
     private String paymentName;
 
     @OneToMany(mappedBy = "paymentMethod")
+    @JsonIgnore
     private List<Rent> rents;
 }

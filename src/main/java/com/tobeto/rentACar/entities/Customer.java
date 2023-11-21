@@ -1,5 +1,6 @@
 package com.tobeto.rentACar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -25,5 +26,6 @@ public class Customer {
     private int licenseYear;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<Rent> rents;
 }

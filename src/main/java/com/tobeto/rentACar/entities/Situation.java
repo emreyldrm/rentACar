@@ -1,5 +1,6 @@
 package com.tobeto.rentACar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class Situation {
     @Column(name = "situation_name")
     private String situationName;
     @OneToMany(mappedBy = "situation")
+    @JsonIgnore
     private List<Car> cars;
 
 }
