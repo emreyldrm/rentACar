@@ -36,4 +36,11 @@ public class BrandsController {
         brandRepository.delete(brandToDelete);
     }
 
+    @PutMapping("{id}")
+    public void update(@PathVariable int id,@RequestBody Brand brand){
+        Brand brandToUpdate = brandRepository.findById(id).orElseThrow();
+        brandToUpdate.setName(brand.getName());
+        brandRepository.save(brandToUpdate);
+
+    }
 }
