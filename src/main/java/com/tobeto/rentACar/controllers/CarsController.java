@@ -2,6 +2,10 @@ package com.tobeto.rentACar.controllers;
 
 import com.tobeto.rentACar.entities.Car;
 import com.tobeto.rentACar.repositories.CarRepository;
+import com.tobeto.rentACar.services.abstracts.CarService;
+import com.tobeto.rentACar.services.dtos.car.requests.AddCarRequest;
+import com.tobeto.rentACar.services.dtos.car.requests.DeleteCarRequest;
+import com.tobeto.rentACar.services.dtos.car.requests.UpdateCarRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,43 +13,24 @@ import java.util.List;
 @RestController
 @RequestMapping("api/cars")
 public class CarsController {
-    private final CarRepository carRepository;
 
-    public CarsController(CarRepository carRepository) {
-        this.carRepository = carRepository;
-    }
+    private final CarService carService;
 
-    @GetMapping
-    private List<Car> getAll(){
-        List<Car> cars = carRepository.findAll();
-        return cars;
-    }
-    @GetMapping("{id}")
-    private Car getById(@PathVariable int id){
-        return carRepository.findById(id).orElseThrow();
+    public CarsController(CarService carService) {
+        this.carService = carService;
     }
 
     @PostMapping
-    private void add(@RequestBody Car car){
-        carRepository.save(car);
+    private void add(@RequestBody AddCarRequest request){
+        carService.add(request);
+    }
+    @PutMapping
+    private void update(@RequestBody UpdateCarRequest request){
+        carService.update(request);
     }
 
     @DeleteMapping("{id}")
-    private void delete(@PathVariable int id){
-        Car carToDelete = carRepository.findById(id).orElseThrow();
-        carRepository.delete(carToDelete);
-    }
-
-    @PutMapping("{id}")
-    public void update(@PathVariable int id, @RequestBody Car car){
-        Car carToUpdate = carRepository.findById(id).orElseThrow();
-        carToUpdate.setModelYear(car.getModelYear());
-        carToUpdate.setModelName(car.getModelName());
-        carToUpdate.setDailyPrice(car.getDailyPrice());
-        carToUpdate.setColor(car.getColor());
-        carToUpdate.setBrand(car.getBrand());
-        carToUpdate.setSituation(car.getSituation());
-        carRepository.save(carToUpdate);
-
+    private void delete(@RequestBody DeleteCarRequest request){
+        carService.delete(request);
     }
 }
