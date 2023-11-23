@@ -1,46 +1,34 @@
 package com.tobeto.rentACar.controllers;
 
-import com.tobeto.rentACar.entities.Brand;
-import com.tobeto.rentACar.repositories.BrandRepository;
+
+import com.tobeto.rentACar.services.abstracts.BrandService;
+import com.tobeto.rentACar.services.dtos.brand.requests.AddBrandRequest;
+import com.tobeto.rentACar.services.dtos.brand.requests.DeleteBrandRequest;
+import com.tobeto.rentACar.services.dtos.brand.requests.UpdateBrandRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api/brands")
 public class BrandsController {
-    private final BrandRepository brandRepository;
 
-    public BrandsController(BrandRepository brandRepository) {
-        this.brandRepository = brandRepository;
-    }
+    public final BrandService brandService;
 
-    @GetMapping
-    public List<Brand> getAll(){
-        List<Brand> brands = brandRepository.findAll();
-        return brands;
+    public BrandsController(BrandService brandService) {
+        this.brandService = brandService;
     }
-    @GetMapping("{id}")
-    public Brand getById(@PathVariable int id){
-        return brandRepository.findById(id).orElseThrow();
-    }
-
     @PostMapping
-    public void add(@RequestBody Brand brand){
-        brandRepository.save(brand);
+    private void add(@RequestBody AddBrandRequest request){
+        brandService.add(request);
     }
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        Brand brandToDelete = brandRepository.findById(id).orElseThrow();
-        brandRepository.delete(brandToDelete);
-    }
-
     @PutMapping("{id}")
-    public void update(@PathVariable int id,@RequestBody Brand brand){
-        Brand brandToUpdate = brandRepository.findById(id).orElseThrow();
-        brandToUpdate.setName(brand.getName());
-        brandRepository.save(brandToUpdate);
-
+    private void update(@RequestBody UpdateBrandRequest request){
+        brandService.update(request);
     }
+    @DeleteMapping("{id}")
+    private void delete(@RequestBody DeleteBrandRequest request){
+        brandService.delete(request);
+    }
+
+
 }
