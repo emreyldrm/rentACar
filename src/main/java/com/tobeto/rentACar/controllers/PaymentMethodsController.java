@@ -1,46 +1,30 @@
 package com.tobeto.rentACar.controllers;
 
-import com.tobeto.rentACar.entities.PaymentMethod;
-import com.tobeto.rentACar.repositories.PaymentMethodRepository;
+import com.tobeto.rentACar.services.abstracts.PaymentService;
+import com.tobeto.rentACar.services.dtos.payment.requests.AddPaymentRequest;
+import com.tobeto.rentACar.services.dtos.payment.requests.DeletePaymentRequest;
+import com.tobeto.rentACar.services.dtos.payment.requests.UpdatePaymentRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api/payMethods")
 public class PaymentMethodsController {
-    private final PaymentMethodRepository paymentMethodRepository;
+    private final PaymentService paymentService;
 
-    public PaymentMethodsController(PaymentMethodRepository paymentMethodRepository) {
-        this.paymentMethodRepository = paymentMethodRepository;
+    public PaymentMethodsController(PaymentService paymentService) {
+        this.paymentService = paymentService;
     }
-
-    @GetMapping
-    public List<PaymentMethod> getAll(){
-        List<PaymentMethod> paymentMethods = paymentMethodRepository.findAll();
-        return paymentMethods;
-    }
-    @GetMapping("{id}")
-    public PaymentMethod getById(@PathVariable int id){
-        return paymentMethodRepository.findById(id).orElseThrow();
-    }
-
     @PostMapping
-    public void add(@RequestBody PaymentMethod paymentMethod){
-        paymentMethodRepository.save(paymentMethod);
+    private void add(@RequestBody AddPaymentRequest request){
+        paymentService.add(request);
     }
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        PaymentMethod paymentMethodToDelete = paymentMethodRepository.findById(id).orElseThrow();
-        paymentMethodRepository.delete(paymentMethodToDelete);
+    @PutMapping
+    private void update(@RequestBody UpdatePaymentRequest request){
+        paymentService.update(request);
     }
-
-    @PutMapping("{id}")
-    public void update(@PathVariable int id,@RequestBody PaymentMethod paymentMethod){
-        PaymentMethod paymentMethodToUpdate = paymentMethodRepository.findById(id).orElseThrow();
-        paymentMethodToUpdate.setPaymentName(paymentMethod.getPaymentName());
-        paymentMethodRepository.save(paymentMethodToUpdate);
-
+    @DeleteMapping
+    private void delete(@RequestBody DeletePaymentRequest request){
+        paymentService.delete(request);
     }
 }
