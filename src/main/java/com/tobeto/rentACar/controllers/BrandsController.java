@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/brands")
 public class BrandsController {
 
-    public final BrandService brandService;
+    private final BrandService brandService;
 
     public BrandsController(BrandService brandService) {
         this.brandService = brandService;

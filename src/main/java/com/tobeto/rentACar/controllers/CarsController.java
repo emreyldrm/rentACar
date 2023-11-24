@@ -1,14 +1,11 @@
 package com.tobeto.rentACar.controllers;
 
-import com.tobeto.rentACar.entities.Car;
-import com.tobeto.rentACar.repositories.CarRepository;
+
 import com.tobeto.rentACar.services.abstracts.CarService;
 import com.tobeto.rentACar.services.dtos.car.requests.AddCarRequest;
 import com.tobeto.rentACar.services.dtos.car.requests.DeleteCarRequest;
 import com.tobeto.rentACar.services.dtos.car.requests.UpdateCarRequest;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/cars")

@@ -1,46 +1,34 @@
 package com.tobeto.rentACar.controllers;
 
-import com.tobeto.rentACar.entities.Situation;
-import com.tobeto.rentACar.repositories.SituationRepository;
+
+import com.tobeto.rentACar.services.abstracts.SituationService;
+import com.tobeto.rentACar.services.dtos.situation.abstracts.AddSituationRequest;
+import com.tobeto.rentACar.services.dtos.situation.abstracts.DeleteSituationRequest;
+import com.tobeto.rentACar.services.dtos.situation.abstracts.UpdateSituationRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api/situations")
 public class SituationController {
-    public final SituationRepository situationRepository;
+    private final SituationService situationService;
 
-    public SituationController(SituationRepository situationRepository) {
-        this.situationRepository = situationRepository;
-    }
-
-    @GetMapping
-    public List<Situation> getAll(){
-        List<Situation> situations = situationRepository.findAll();
-        return situations;
-    }
-    @GetMapping("{id}")
-    public Situation getById(@PathVariable int id){
-        return situationRepository.findById(id).orElseThrow();
+    public SituationController(SituationService situationService) {
+        this.situationService = situationService;
     }
 
     @PostMapping
-    public void add(@RequestBody Situation situation){
-        situationRepository.save(situation);
+    private void add(@RequestBody AddSituationRequest request){
+        situationService.add(request);
+    }
+    @PutMapping
+    private void update(@RequestBody UpdateSituationRequest request){
+        situationService.update(request);
+    }
+    @DeleteMapping
+    private void delete(@RequestBody DeleteSituationRequest request){
+        situationService.delete(request);
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        Situation situationToDelete = situationRepository.findById(id).orElseThrow();
-        situationRepository.delete(situationToDelete);
-    }
 
-    @PutMapping("{id}")
-    public void update(@PathVariable int id,@RequestBody Situation situation){
-        Situation situationToUpdate = situationRepository.findById(id).orElseThrow();
-        situationToUpdate.setSituationName(situation.getSituationName());
-        situationRepository.save(situationToUpdate);
-
-    }
 }

@@ -1,50 +1,32 @@
 package com.tobeto.rentACar.controllers;
 
-import com.tobeto.rentACar.entities.Rent;
-import com.tobeto.rentACar.repositories.RentRepository;
+import com.tobeto.rentACar.services.abstracts.RentService;
+import com.tobeto.rentACar.services.dtos.rent.abstracts.AddRentRequest;
+import com.tobeto.rentACar.services.dtos.rent.abstracts.DeleteRentRequest;
+import com.tobeto.rentACar.services.dtos.rent.abstracts.UpdateRentRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api/rentals")
 public class RentalsController {
-    public final RentRepository rentRepository;
+    private final RentService rentService;
 
-    public RentalsController(RentRepository rentRepository) {
-        this.rentRepository = rentRepository;
-    }
-
-    @GetMapping
-    public List<Rent> getAll(){
-        List<Rent> rents = rentRepository.findAll();
-        return rents;
-    }
-    @GetMapping("{id}")
-    public Rent getById(@PathVariable int id){
-        return rentRepository.findById(id).orElseThrow();
+    public RentalsController(RentService rentService) {
+        this.rentService = rentService;
     }
 
     @PostMapping
-    public void add(@RequestBody Rent rent){
-        rentRepository.save(rent);
+    private void add(@RequestBody AddRentRequest request){
+        rentService.add(request);
+    }
+    @PutMapping
+    private void update(@RequestBody UpdateRentRequest request){
+        rentService.update(request);
+    }
+    @DeleteMapping
+    private void delete(@RequestBody DeleteRentRequest request){
+        rentService.delete(request);
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        Rent rentToDelete = rentRepository.findById(id).orElseThrow();
-        rentRepository.delete(rentToDelete);
-    }
-
-    @PutMapping("{id}")
-    public void update(@PathVariable int id,@RequestBody Rent rent){
-        Rent rentToUpdate = rentRepository.findById(id).orElseThrow();
-        rentToUpdate.setPickUpDate(rent.getPickUpDate());
-        rentToUpdate.setDropOffDate(rent.getDropOffDate());
-        rentToUpdate.setCustomer(rent.getCustomer());
-        rentToUpdate.setCar(rent.getCar());
-        rentToUpdate.setPaymentMethod(rent.getPaymentMethod());
-        rentRepository.save(rentToUpdate);
-
-    }
 }

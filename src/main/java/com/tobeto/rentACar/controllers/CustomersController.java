@@ -7,7 +7,6 @@ import com.tobeto.rentACar.services.dtos.customer.requests.UpdateCustomerRequest
 import org.springframework.web.bind.annotation.*;
 
 
-
 @RestController
 @RequestMapping("api/customers")
 public class CustomersController {
