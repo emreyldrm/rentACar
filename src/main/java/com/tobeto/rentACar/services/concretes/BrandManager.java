@@ -6,7 +6,11 @@ import com.tobeto.rentACar.services.abstracts.BrandService;
 import com.tobeto.rentACar.services.dtos.brand.requests.AddBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.requests.DeleteBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.requests.UpdateBrandRequest;
+import com.tobeto.rentACar.services.dtos.brand.responses.GetAllBrandsResponse;
+import com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BrandManager implements BrandService {
@@ -36,5 +40,21 @@ public class BrandManager implements BrandService {
         Brand brandToDelete = brandRepository.findById(request.getId()).orElseThrow();
         brandRepository.delete(brandToDelete);
 
+    }
+
+    @Override
+    public List<Brand> getByName(String name) {
+
+        return brandRepository.findByNameStartingWith(name);
+    }
+
+    @Override
+    public List<GetListBrandResponse> getByNameDto(String name) {
+        return brandRepository.findByNameStartingWithDto(name);
+    }
+
+    @Override
+    public List<GetAllBrandsResponse> getAllBrandsDto() {
+        return brandRepository.getAllBrandsDto();
     }
 }
