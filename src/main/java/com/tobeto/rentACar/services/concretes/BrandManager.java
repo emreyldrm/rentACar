@@ -55,6 +55,6 @@ public class BrandManager implements BrandService {
 
     @Override
     public List<GetAllBrandsResponse> getAllBrandsDto() {
-        return brandRepository.getAllBrandsDto();
+        return brandRepository.findAllBrandsDto();
     }
 }

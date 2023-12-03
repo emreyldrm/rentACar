@@ -1,11 +1,17 @@
 package com.tobeto.rentACar.controllers;
 
 
+import com.tobeto.rentACar.entities.Car;
 import com.tobeto.rentACar.services.abstracts.CarService;
 import com.tobeto.rentACar.services.dtos.car.requests.AddCarRequest;
 import com.tobeto.rentACar.services.dtos.car.requests.DeleteCarRequest;
 import com.tobeto.rentACar.services.dtos.car.requests.UpdateCarRequest;
+import com.tobeto.rentACar.services.dtos.car.responses.GetAllCarsResponse;
+import com.tobeto.rentACar.services.dtos.car.responses.GetListCarByModelYearResponse;
+import com.tobeto.rentACar.services.dtos.car.responses.GetListCarBySituationResponse;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/cars")
@@ -29,5 +35,22 @@ public class CarsController {
     @DeleteMapping("{id}")
     private void delete(@RequestBody DeleteCarRequest request){
         carService.delete(request);
+    }
+
+    @GetMapping
+    private List<Car> getByModelYear(@RequestParam int year){
+        return carService.getByModelYear(year);
+    }
+    @GetMapping("dto/modelYear")
+    private List<GetListCarByModelYearResponse> getByModelYearDto(@RequestParam int modelYear){
+        return carService.getByModelYearDto(modelYear);
+    }
+    @GetMapping("dto/situation")
+    private List<GetListCarBySituationResponse> getBySituationDto(@RequestParam String situation){
+        return carService.getBySituationDto(situation);
+    }
+    @GetMapping("allCars")
+    private List<GetAllCarsResponse> getAllCarsDto(){
+        return carService.getAllCarsDto();
     }
 }
