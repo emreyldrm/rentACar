@@ -6,7 +6,11 @@ import com.tobeto.rentACar.services.abstracts.SituationService;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.AddSituationRequest;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.DeleteSituationRequest;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.UpdateSituationRequest;
+import com.tobeto.rentACar.services.dtos.situation.concretes.GetAllSituationsResponse;
+import com.tobeto.rentACar.services.dtos.situation.concretes.GetListSituationByNameResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SituationManager implements SituationService {
@@ -37,5 +41,15 @@ public class SituationManager implements SituationService {
         Situation situationToDelete = situationRepository.findById(request.getId()).orElseThrow();
         situationRepository.delete(situationToDelete);
 
+    }
+
+    @Override
+    public List<GetListSituationByNameResponse> getByNameDto(String name) {
+        return situationRepository.findByNameDto(name);
+    }
+
+    @Override
+    public List<GetAllSituationsResponse> getAllSituationsDto() {
+        return situationRepository.findAllSituationsDto();
     }
 }

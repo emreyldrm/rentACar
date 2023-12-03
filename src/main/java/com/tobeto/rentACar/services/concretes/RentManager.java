@@ -6,7 +6,12 @@ import com.tobeto.rentACar.services.abstracts.RentService;
 import com.tobeto.rentACar.services.dtos.rent.abstracts.AddRentRequest;
 import com.tobeto.rentACar.services.dtos.rent.abstracts.DeleteRentRequest;
 import com.tobeto.rentACar.services.dtos.rent.abstracts.UpdateRentRequest;
+import com.tobeto.rentACar.services.dtos.rent.concretes.GetListRentByPayMethodResponse;
+import com.tobeto.rentACar.services.dtos.rent.concretes.GetListRentByBrandResponse;
+import com.tobeto.rentACar.services.dtos.rent.concretes.GetListRentByCustomerResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class RentManager implements RentService {
@@ -40,5 +45,20 @@ public class RentManager implements RentService {
     public void delete(DeleteRentRequest request) {
         Rent rentToDelete = rentRepository.findById(request.getId()).orElseThrow();
         rentRepository.delete(rentToDelete);
+    }
+
+    @Override
+    public List<GetListRentByCustomerResponse> getByCustomerName(String customerName) {
+        return rentRepository.findByCustomerDto(customerName);
+    }
+
+    @Override
+    public List<GetListRentByBrandResponse> getByBrandName(String brandName) {
+        return rentRepository.findByBrandDto(brandName);
+    }
+
+    @Override
+    public List<GetListRentByPayMethodResponse> getByPayMethod(String payName) {
+        return rentRepository.findByPayMethodDto(payName);
     }
 }
