@@ -6,7 +6,11 @@ import com.tobeto.rentACar.services.abstracts.PaymentService;
 import com.tobeto.rentACar.services.dtos.payment.requests.AddPaymentRequest;
 import com.tobeto.rentACar.services.dtos.payment.requests.DeletePaymentRequest;
 import com.tobeto.rentACar.services.dtos.payment.requests.UpdatePaymentRequest;
+import com.tobeto.rentACar.services.dtos.payment.responses.GetAllPaymentsResponse;
+import com.tobeto.rentACar.services.dtos.payment.responses.GetListPaymentByNameResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PaymentManager implements PaymentService {
@@ -36,5 +40,15 @@ public class PaymentManager implements PaymentService {
         PaymentMethod payMethodToDelete = paymentRepository.findById(request.getId()).orElseThrow();
         paymentRepository.delete(payMethodToDelete);
 
+    }
+
+    @Override
+    public List<GetListPaymentByNameResponse> getByNameDto(String name) {
+        return paymentRepository.findByNameDto(name);
+    }
+
+    @Override
+    public List<GetAllPaymentsResponse> getAllPaymentsDto() {
+        return paymentRepository.findAllPaymentsDto();
     }
 }

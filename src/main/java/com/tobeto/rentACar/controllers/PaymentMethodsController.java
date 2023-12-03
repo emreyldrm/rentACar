@@ -4,7 +4,11 @@ import com.tobeto.rentACar.services.abstracts.PaymentService;
 import com.tobeto.rentACar.services.dtos.payment.requests.AddPaymentRequest;
 import com.tobeto.rentACar.services.dtos.payment.requests.DeletePaymentRequest;
 import com.tobeto.rentACar.services.dtos.payment.requests.UpdatePaymentRequest;
+import com.tobeto.rentACar.services.dtos.payment.responses.GetAllPaymentsResponse;
+import com.tobeto.rentACar.services.dtos.payment.responses.GetListPaymentByNameResponse;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -26,5 +30,13 @@ public class PaymentMethodsController {
     @DeleteMapping
     private void delete(@RequestBody DeletePaymentRequest request){
         paymentService.delete(request);
+    }
+    @GetMapping("dto/payName")
+    private List<GetListPaymentByNameResponse> getByPayNameDto(@RequestParam String name){
+        return paymentService.getByNameDto(name);
+    }
+    @GetMapping("allPayMethods")
+    private List<GetAllPaymentsResponse> getAllPaymentsDto(){
+        return paymentService.getAllPaymentsDto();
     }
 }
