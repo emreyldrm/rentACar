@@ -9,6 +9,7 @@ import com.tobeto.rentACar.services.dtos.payment.requests.UpdatePaymentRequest;
 import com.tobeto.rentACar.services.dtos.payment.responses.GetListPaymentResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -48,6 +49,9 @@ public class PaymentManager implements PaymentService {
 
     @Override
     public List<GetListPaymentResponse> getAllPaymentsDto() {
-        return paymentRepository.findAllPaymentsDto();
+        return paymentRepository.findAllPaymentsDto()
+                .stream()
+                .sorted(Comparator.comparing(GetListPaymentResponse::getName))
+                .toList();
     }
 }

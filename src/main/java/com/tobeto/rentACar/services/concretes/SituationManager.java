@@ -44,7 +44,12 @@ public class SituationManager implements SituationService {
 
     @Override
     public List<GetListSituationResponse> getByNameDto(String name) {
-        return situationRepository.findByNameDto(name);
+        return situationRepository.findAll()
+                .stream()
+                .filter(situation -> situation.getSituationName().equals(name))
+                .map(situation -> new GetListSituationResponse(situation.getSituationName()))
+                .toList();
+        //return situationRepository.findByNameDto(name);
     }
 
     @Override

@@ -9,7 +9,9 @@ import com.tobeto.rentACar.services.dtos.car.requests.UpdateCarRequest;
 import com.tobeto.rentACar.services.dtos.car.responses.GetListCarResponse;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CarManager implements CarService {
@@ -63,6 +65,9 @@ public class CarManager implements CarService {
 
     @Override
     public List<GetListCarResponse> getAllCarsDto() {
-        return carRepository.findAllCarsDto();
+        return carRepository.findAllCarsDto()
+                .stream()
+                .filter(car -> car.getDailyPrice().compareTo(new BigDecimal("1000")) > 0)
+                .collect(Collectors.toList());
     }
 }

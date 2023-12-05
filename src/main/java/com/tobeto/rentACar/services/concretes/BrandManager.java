@@ -9,6 +9,7 @@ import com.tobeto.rentACar.services.dtos.brand.requests.UpdateBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -43,13 +44,6 @@ public class BrandManager implements BrandService {
 
     @Override
     public List<Brand> getByName(String name) {
-        /*with JPQL
-
-        return brandRepository.findByNameStartingWith(name);
-
-        */
-
-        //with STREAM API
         return brandRepository.findByNameStartingWith(name);
     }
 
@@ -60,6 +54,9 @@ public class BrandManager implements BrandService {
 
     @Override
     public List<GetListBrandResponse> getAllBrandsDto() {
-        return brandRepository.findAllBrandsDto();
+        //with STREAM API
+        return brandRepository.findAllBrandsDto().stream()
+                .sorted(Comparator.comparing(GetListBrandResponse::getName))
+                .toList();
     }
 }

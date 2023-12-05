@@ -11,6 +11,7 @@ import com.tobeto.rentACar.services.dtos.customer.responses.GetListCustomerRespo
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerManager implements CustomerService {
@@ -54,6 +55,9 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public List<GetListCustomerResponse> getAllCustomersDto() {
-        return customerRepository.findAllCustomersDto();
+        return customerRepository.findAllCustomersDto()
+                .stream()
+                .filter(customer -> customer.getAge() > 23)
+                .collect(Collectors.toList());
     }
 }
