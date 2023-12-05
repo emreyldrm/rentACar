@@ -6,8 +6,7 @@ import com.tobeto.rentACar.services.abstracts.SituationService;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.AddSituationRequest;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.DeleteSituationRequest;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.UpdateSituationRequest;
-import com.tobeto.rentACar.services.dtos.situation.concretes.GetAllSituationsResponse;
-import com.tobeto.rentACar.services.dtos.situation.concretes.GetListSituationByNameResponse;
+import com.tobeto.rentACar.services.dtos.situation.concretes.GetListSituationResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,12 +43,12 @@ public class SituationManager implements SituationService {
     }
 
     @Override
-    public List<GetListSituationByNameResponse> getByNameDto(String name) {
+    public List<GetListSituationResponse> getByNameDto(String name) {
         return situationRepository.findByNameDto(name);
     }
 
     @Override
-    public List<GetAllSituationsResponse> getAllSituationsDto() {
+    public List<GetListSituationResponse> getAllSituationsDto() {
         return situationRepository.findAllSituationsDto();
     }
 }

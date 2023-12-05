@@ -1,9 +1,7 @@
 package com.tobeto.rentACar.repositories;
 
 import com.tobeto.rentACar.entities.Car;
-import com.tobeto.rentACar.services.dtos.car.responses.GetAllCarsResponse;
-import com.tobeto.rentACar.services.dtos.car.responses.GetListCarByModelYearResponse;
-import com.tobeto.rentACar.services.dtos.car.responses.GetListCarBySituationResponse;
+import com.tobeto.rentACar.services.dtos.car.responses.GetListCarResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,24 +13,26 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
     List<Car> findByModelYear(int year);
 
     //Custom Query Methods
-    @Query("Select new com.tobeto.rentACar.services.dtos.car.responses.GetListCarByModelYearResponse" +
-            "(c.modelYear, c.modelName, b.name) " +
+    @Query("Select new com.tobeto.rentACar.services.dtos.car.responses.GetListCarResponse" +
+            "(c.modelYear, c.modelName, s.situationName, c.dailyPrice, new com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse(b.name) ) " +
             "FROM Car c " +
             "JOIN c.brand b " +
+            "JOIN c.situation s " +
             "WHERE c.modelYear = :modelYear")
-    List<GetListCarByModelYearResponse> findByModelYearDto(int modelYear);
-    @Query("Select new com.tobeto.rentACar.services.dtos.car.responses.GetListCarBySituationResponse" +
-            "(c.modelYear, b.name, c.modelName, s.situationName) " +
+    List<GetListCarResponse> findByModelYearDto(int modelYear);
+    @Query("Select new com.tobeto.rentACar.services.dtos.car.responses.GetListCarResponse" +
+            "(c.modelYear, c.modelName, s.situationName, c.dailyPrice, new com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse(b.name) ) " +
             "FROM Car c " +
             "JOIN c.brand b " +
             "JOIN c.situation s " +
             "WHERE s.situationName = :situation")
-    List<GetListCarBySituationResponse> findBySituationDto(String situation);
+    List<GetListCarResponse> findBySituationDto(String situation);
 
-    @Query("Select new com.tobeto.rentACar.services.dtos.car.responses.GetAllCarsResponse" +
-            "(b.name, c.modelName, c.modelYear, c.dailyPrice) " +
+    @Query("Select new com.tobeto.rentACar.services.dtos.car.responses.GetListCarResponse" +
+            "(c.modelYear, c.modelName, s.situationName, c.dailyPrice, new com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse(b.name) ) " +
             "FROM Car c " +
-            "JOIN c.brand b")
-    List<GetAllCarsResponse> findAllCarsDto();
+            "JOIN c.brand b " +
+            "JOIN c.situation s ")
+    List<GetListCarResponse> findAllCarsDto();
 
 }

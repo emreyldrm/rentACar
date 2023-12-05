@@ -6,7 +6,6 @@ import com.tobeto.rentACar.services.abstracts.BrandService;
 import com.tobeto.rentACar.services.dtos.brand.requests.AddBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.requests.DeleteBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.requests.UpdateBrandRequest;
-import com.tobeto.rentACar.services.dtos.brand.responses.GetAllBrandsResponse;
 import com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +42,7 @@ public class BrandsController {
         return brandService.getByNameDto(name);
     }
     @GetMapping("allBrands")
-    private List<GetAllBrandsResponse> getAllBrandsDto(){
+    private List<GetListBrandResponse> getAllBrandsDto(){
         return brandService.getAllBrandsDto();
     }
 

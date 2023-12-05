@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetListCustomerByFirstNameResponse {
-    private String fName;
-    private String lName;
-    private int age;
-    private int licenseYear;
+public class GetListCustomerContactResponse {
+    private String phone;
+    private String mail;
+    private GetListCustomerResponse customer;
 }

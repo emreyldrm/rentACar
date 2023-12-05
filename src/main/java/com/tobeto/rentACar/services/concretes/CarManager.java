@@ -6,9 +6,7 @@ import com.tobeto.rentACar.services.abstracts.CarService;
 import com.tobeto.rentACar.services.dtos.car.requests.AddCarRequest;
 import com.tobeto.rentACar.services.dtos.car.requests.DeleteCarRequest;
 import com.tobeto.rentACar.services.dtos.car.requests.UpdateCarRequest;
-import com.tobeto.rentACar.services.dtos.car.responses.GetAllCarsResponse;
-import com.tobeto.rentACar.services.dtos.car.responses.GetListCarByModelYearResponse;
-import com.tobeto.rentACar.services.dtos.car.responses.GetListCarBySituationResponse;
+import com.tobeto.rentACar.services.dtos.car.responses.GetListCarResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,17 +52,17 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<GetListCarByModelYearResponse> getByModelYearDto(int modelYear) {
+    public List<GetListCarResponse> getByModelYearDto(int modelYear) {
         return carRepository.findByModelYearDto(modelYear);
     }
 
     @Override
-    public List<GetListCarBySituationResponse> getBySituationDto(String situation) {
+    public List<GetListCarResponse> getBySituationDto(String situation) {
         return carRepository.findBySituationDto(situation);
     }
 
     @Override
-    public List<GetAllCarsResponse> getAllCarsDto() {
+    public List<GetListCarResponse> getAllCarsDto() {
         return carRepository.findAllCarsDto();
     }
 }

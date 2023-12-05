@@ -1,12 +1,11 @@
 package com.tobeto.rentACar.controllers;
 
-import com.tobeto.rentACar.entities.Customer;
 import com.tobeto.rentACar.services.abstracts.CustomerService;
 import com.tobeto.rentACar.services.dtos.customer.requests.AddCustomerRequest;
 import com.tobeto.rentACar.services.dtos.customer.requests.DeleteCustomerRequest;
 import com.tobeto.rentACar.services.dtos.customer.requests.UpdateCustomerRequest;
-import com.tobeto.rentACar.services.dtos.customer.responses.GetAllCustomersByContactResponse;
-import com.tobeto.rentACar.services.dtos.customer.responses.GetListCustomerByFirstNameResponse;
+import com.tobeto.rentACar.services.dtos.customer.responses.GetListCustomerContactResponse;
+import com.tobeto.rentACar.services.dtos.customer.responses.GetListCustomerResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,11 +35,11 @@ public class CustomersController {
         customerService.delete(request);
     }
     @GetMapping("dto/fName")
-    private List<GetListCustomerByFirstNameResponse> getByFirstNameDto(@RequestParam String fName){
+    private List<GetListCustomerContactResponse> getByFirstNameDto(@RequestParam String fName){
         return customerService.getByFirstNameDto(fName);
     }
-    @GetMapping("allCustomers/contact")
-    private List<GetAllCustomersByContactResponse> getAllCustomersDto(){
+    @GetMapping("allCustomers")
+    private List<GetListCustomerResponse> getAllCustomersDto(){
         return customerService.getAllCustomersDto();
     }
 }

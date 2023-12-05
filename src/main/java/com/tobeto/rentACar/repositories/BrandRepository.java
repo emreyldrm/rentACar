@@ -1,7 +1,6 @@
 package com.tobeto.rentACar.repositories;
 
 import com.tobeto.rentACar.entities.Brand;
-import com.tobeto.rentACar.services.dtos.brand.responses.GetAllBrandsResponse;
 import com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +17,7 @@ public interface BrandRepository extends JpaRepository<Brand, Integer> {
     @Query("Select new com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse(b.name) " +
             "FROM Brand b WHERE b.name LIKE ?1%")// ?1 equals :name
     List<GetListBrandResponse> findByNameStartingWithDto(String name);
-    @Query("Select new com.tobeto.rentACar.services.dtos.brand.responses.GetAllBrandsResponse(b.name) " +
+    @Query("Select new com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse(b.name) " +
             "FROM Brand b")
-    List<GetAllBrandsResponse> findAllBrandsDto();
+    List<GetListBrandResponse> findAllBrandsDto();
 }

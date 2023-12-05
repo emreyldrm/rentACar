@@ -6,8 +6,8 @@ import com.tobeto.rentACar.services.abstracts.CustomerService;
 import com.tobeto.rentACar.services.dtos.customer.requests.AddCustomerRequest;
 import com.tobeto.rentACar.services.dtos.customer.requests.DeleteCustomerRequest;
 import com.tobeto.rentACar.services.dtos.customer.requests.UpdateCustomerRequest;
-import com.tobeto.rentACar.services.dtos.customer.responses.GetAllCustomersByContactResponse;
-import com.tobeto.rentACar.services.dtos.customer.responses.GetListCustomerByFirstNameResponse;
+import com.tobeto.rentACar.services.dtos.customer.responses.GetListCustomerContactResponse;
+import com.tobeto.rentACar.services.dtos.customer.responses.GetListCustomerResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,12 +48,12 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public List<GetListCustomerByFirstNameResponse> getByFirstNameDto(String fName) {
+    public List<GetListCustomerContactResponse> getByFirstNameDto(String fName) {
         return customerRepository.findByFirstNameDto(fName);
     }
 
     @Override
-    public List<GetAllCustomersByContactResponse> getAllCustomersDto() {
+    public List<GetListCustomerResponse> getAllCustomersDto() {
         return customerRepository.findAllCustomersDto();
     }
 }

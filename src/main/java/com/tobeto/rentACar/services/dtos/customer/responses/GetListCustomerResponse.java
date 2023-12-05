@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllCustomersByContactResponse {
+public class GetListCustomerResponse {
     private String fName;
     private String lName;
-    private String phone;
-    private String mail;
-
+    private int age;
 }

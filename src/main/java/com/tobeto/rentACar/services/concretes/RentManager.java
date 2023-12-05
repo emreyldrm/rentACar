@@ -6,9 +6,7 @@ import com.tobeto.rentACar.services.abstracts.RentService;
 import com.tobeto.rentACar.services.dtos.rent.abstracts.AddRentRequest;
 import com.tobeto.rentACar.services.dtos.rent.abstracts.DeleteRentRequest;
 import com.tobeto.rentACar.services.dtos.rent.abstracts.UpdateRentRequest;
-import com.tobeto.rentACar.services.dtos.rent.concretes.GetListRentByPayMethodResponse;
-import com.tobeto.rentACar.services.dtos.rent.concretes.GetListRentByBrandResponse;
-import com.tobeto.rentACar.services.dtos.rent.concretes.GetListRentByCustomerResponse;
+import com.tobeto.rentACar.services.dtos.rent.concretes.GetListRentResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,17 +46,17 @@ public class RentManager implements RentService {
     }
 
     @Override
-    public List<GetListRentByCustomerResponse> getByCustomerName(String customerName) {
+    public List<GetListRentResponse> getByCustomerName(String customerName) {
         return rentRepository.findByCustomerDto(customerName);
     }
 
     @Override
-    public List<GetListRentByBrandResponse> getByBrandName(String brandName) {
+    public List<GetListRentResponse> getByBrandName(String brandName) {
         return rentRepository.findByBrandDto(brandName);
     }
 
     @Override
-    public List<GetListRentByPayMethodResponse> getByPayMethod(String payName) {
+    public List<GetListRentResponse> getByPayMethod(String payName) {
         return rentRepository.findByPayMethodDto(payName);
     }
 }

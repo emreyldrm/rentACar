@@ -5,8 +5,7 @@ import com.tobeto.rentACar.services.abstracts.SituationService;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.AddSituationRequest;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.DeleteSituationRequest;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.UpdateSituationRequest;
-import com.tobeto.rentACar.services.dtos.situation.concretes.GetAllSituationsResponse;
-import com.tobeto.rentACar.services.dtos.situation.concretes.GetListSituationByNameResponse;
+import com.tobeto.rentACar.services.dtos.situation.concretes.GetListSituationResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,11 +33,11 @@ public class SituationController {
         situationService.delete(request);
     }
     @GetMapping("dto/paymentName")
-    private List<GetListSituationByNameResponse> getByNameDto(@RequestParam String name){
+    private List<GetListSituationResponse> getByNameDto(@RequestParam String name){
         return situationService.getByNameDto(name);
     }
     @GetMapping("allSituations")
-    private List<GetAllSituationsResponse> getByNameDto(){
+    private List<GetListSituationResponse> getByNameDto(){
         return situationService.getAllSituationsDto();
     }
 }
