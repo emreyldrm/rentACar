@@ -5,6 +5,7 @@ import com.tobeto.rentACar.services.dtos.rent.abstracts.AddRentRequest;
 import com.tobeto.rentACar.services.dtos.rent.abstracts.DeleteRentRequest;
 import com.tobeto.rentACar.services.dtos.rent.abstracts.UpdateRentRequest;
 import com.tobeto.rentACar.services.dtos.rent.concretes.GetListRentResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,15 +21,15 @@ public class RentalsController {
     }
 
     @PostMapping
-    private void add(@RequestBody AddRentRequest request){
+    private void add(@RequestBody @Valid AddRentRequest request){
         rentService.add(request);
     }
     @PutMapping
-    private void update(@RequestBody UpdateRentRequest request){
+    private void update(@RequestBody @Valid UpdateRentRequest request){
         rentService.update(request);
     }
     @DeleteMapping
-    private void delete(@RequestBody DeleteRentRequest request){
+    private void delete(@RequestBody @Valid DeleteRentRequest request){
         rentService.delete(request);
     }
     @GetMapping("dto/customer")

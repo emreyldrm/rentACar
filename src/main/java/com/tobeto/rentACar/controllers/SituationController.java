@@ -6,6 +6,7 @@ import com.tobeto.rentACar.services.dtos.situation.abstracts.AddSituationRequest
 import com.tobeto.rentACar.services.dtos.situation.abstracts.DeleteSituationRequest;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.UpdateSituationRequest;
 import com.tobeto.rentACar.services.dtos.situation.concretes.GetListSituationResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,15 +22,15 @@ public class SituationController {
     }
 
     @PostMapping
-    private void add(@RequestBody AddSituationRequest request){
+    private void add(@RequestBody @Valid AddSituationRequest request){
         situationService.add(request);
     }
     @PutMapping
-    private void update(@RequestBody UpdateSituationRequest request){
+    private void update(@RequestBody @Valid UpdateSituationRequest request){
         situationService.update(request);
     }
     @DeleteMapping
-    private void delete(@RequestBody DeleteSituationRequest request){
+    private void delete(@RequestBody @Valid DeleteSituationRequest request){
         situationService.delete(request);
     }
     @GetMapping("dto/paymentName")

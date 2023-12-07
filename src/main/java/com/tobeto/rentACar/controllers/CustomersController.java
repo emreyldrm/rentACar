@@ -6,6 +6,7 @@ import com.tobeto.rentACar.services.dtos.customer.requests.DeleteCustomerRequest
 import com.tobeto.rentACar.services.dtos.customer.requests.UpdateCustomerRequest;
 import com.tobeto.rentACar.services.dtos.customer.responses.GetListCustomerContactResponse;
 import com.tobeto.rentACar.services.dtos.customer.responses.GetListCustomerResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,16 +23,16 @@ public class CustomersController {
     }
 
     @PostMapping
-    private void add(@RequestBody AddCustomerRequest request){
+    private void add(@RequestBody @Valid AddCustomerRequest request){
         customerService.add(request);
     }
 
     @PutMapping
-    private void update(@RequestBody UpdateCustomerRequest request){
+    private void update(@RequestBody @Valid UpdateCustomerRequest request){
         customerService.update(request);
     }
     @DeleteMapping
-    private void delete(@RequestBody DeleteCustomerRequest request){
+    private void delete(@RequestBody @Valid DeleteCustomerRequest request){
         customerService.delete(request);
     }
     @GetMapping("dto/fName")
