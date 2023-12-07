@@ -17,4 +17,5 @@ public interface SituationRepository extends JpaRepository<Situation, Integer> {
             "(s.situationName) " +
             "FROM Situation s")
     List<GetListSituationResponse> findAllSituationsDto();
+    boolean existsSituationBySituationName(String name);
 }

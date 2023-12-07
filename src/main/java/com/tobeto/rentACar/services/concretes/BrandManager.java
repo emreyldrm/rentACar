@@ -23,6 +23,8 @@ public class BrandManager implements BrandService {
 
     @Override
     public void add(AddBrandRequest request) {
+        if(request.getName().length() < 3)
+            throw new RuntimeException("Add Error: Brand name cannot be less than 3 digits!");
         Brand brand = new Brand();
         brand.setName(request.getName());
         brandRepository.save(brand);
@@ -30,14 +32,14 @@ public class BrandManager implements BrandService {
 
     @Override
     public void update(UpdateBrandRequest request) {
-        Brand brandToUpdate = brandRepository.findById(request.getId()).orElseThrow();
+        Brand brandToUpdate = brandRepository.findById(request.getId()).orElseThrow(()-> new RuntimeException("Update Error : There is no brand with this id!"));
         brandToUpdate.setName(request.getName());
         brandRepository.save(brandToUpdate);
     }
 
     @Override
     public void delete(DeleteBrandRequest request) {
-        Brand brandToDelete = brandRepository.findById(request.getId()).orElseThrow();
+        Brand brandToDelete = brandRepository.findById(request.getId()).orElseThrow(()-> new RuntimeException("Delete Error : There is no brand with this id!"));
         brandRepository.delete(brandToDelete);
 
     }
@@ -58,5 +60,10 @@ public class BrandManager implements BrandService {
         return brandRepository.findAllBrandsDto().stream()
                 .sorted(Comparator.comparing(GetListBrandResponse::getName))
                 .toList();
+    }
+
+    @Override
+    public Brand getById(int id) {
+        return brandRepository.findById(id).orElseThrow(()-> new RuntimeException("There is no brand with this id!"));
     }
 }

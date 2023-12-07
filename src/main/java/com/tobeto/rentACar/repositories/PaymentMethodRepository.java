@@ -18,4 +18,5 @@ public interface PaymentMethodRepository extends JpaRepository<PaymentMethod,Int
             "(p.paymentName) " +
             "FROM PaymentMethod p")
     List<GetListPaymentResponse> findAllPaymentsDto();
+    boolean existsPaymentMethodByPaymentName(String name);
 }

@@ -1,5 +1,6 @@
 package com.tobeto.rentACar.services.abstracts;
 
+import com.tobeto.rentACar.entities.Situation;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.AddSituationRequest;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.DeleteSituationRequest;
 import com.tobeto.rentACar.services.dtos.situation.abstracts.UpdateSituationRequest;
@@ -14,4 +15,5 @@ public interface SituationService {
     void delete(DeleteSituationRequest request);
     List<GetListSituationResponse> getByNameDto(String name);
     List<GetListSituationResponse> getAllSituationsDto();
+    Situation getById(int id);
 }

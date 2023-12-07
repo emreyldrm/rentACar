@@ -1,5 +1,6 @@
 package com.tobeto.rentACar.services.abstracts;
 
+import com.tobeto.rentACar.entities.Customer;
 import com.tobeto.rentACar.services.dtos.customer.requests.AddCustomerRequest;
 import com.tobeto.rentACar.services.dtos.customer.requests.DeleteCustomerRequest;
 import com.tobeto.rentACar.services.dtos.customer.requests.UpdateCustomerRequest;
@@ -14,4 +15,5 @@ public interface CustomerService {
     void delete(DeleteCustomerRequest request);
     List<GetListCustomerContactResponse> getByFirstNameDto(String fName);
     List<GetListCustomerResponse> getAllCustomersDto();
+    Customer getById(int id);
 }

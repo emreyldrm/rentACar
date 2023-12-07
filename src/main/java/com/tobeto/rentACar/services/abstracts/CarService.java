@@ -17,4 +17,5 @@ public interface CarService {
     List<GetListCarResponse> getByModelYearDto(int modelYear);
     List<GetListCarResponse> getBySituationDto(String situation);
     List<GetListCarResponse> getAllCarsDto();
+    Car getById(int id);
 }

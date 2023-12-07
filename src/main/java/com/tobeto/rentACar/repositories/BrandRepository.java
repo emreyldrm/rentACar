@@ -20,4 +20,6 @@ public interface BrandRepository extends JpaRepository<Brand, Integer> {
     @Query("Select new com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse(b.name) " +
             "FROM Brand b")
     List<GetListBrandResponse> findAllBrandsDto();
+
+
 }

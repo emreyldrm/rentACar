@@ -1,5 +1,6 @@
 package com.tobeto.rentACar.services.abstracts;
 
+import com.tobeto.rentACar.entities.PaymentMethod;
 import com.tobeto.rentACar.services.dtos.payment.requests.AddPaymentRequest;
 import com.tobeto.rentACar.services.dtos.payment.requests.DeletePaymentRequest;
 import com.tobeto.rentACar.services.dtos.payment.requests.UpdatePaymentRequest;
@@ -13,4 +14,5 @@ public interface PaymentService {
     void delete(DeletePaymentRequest request);
     List<GetListPaymentResponse> getByNameDto(String name);
     List<GetListPaymentResponse> getAllPaymentsDto();
+    PaymentMethod getById(int id);
 }

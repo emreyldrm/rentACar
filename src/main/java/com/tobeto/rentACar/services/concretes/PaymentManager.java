@@ -22,6 +22,9 @@ public class PaymentManager implements PaymentService {
 
     @Override
     public void add(AddPaymentRequest request) {
+        if(paymentRepository.existsPaymentMethodByPaymentName(request.getName()))
+            throw new RuntimeException("Add Error : This payment is already exists!");
+
         PaymentMethod paymentMethod = new PaymentMethod();
         paymentMethod.setPaymentName(request.getName());
         paymentRepository.save(paymentMethod);
@@ -29,7 +32,7 @@ public class PaymentManager implements PaymentService {
 
     @Override
     public void update(UpdatePaymentRequest request) {
-        PaymentMethod payMethodToUpdate = paymentRepository.findById(request.getId()).orElseThrow();
+        PaymentMethod payMethodToUpdate = paymentRepository.findById(request.getId()).orElseThrow(()-> new RuntimeException("Update Error : There is no payment with this id!"));
         payMethodToUpdate.setPaymentName(request.getName());
         paymentRepository.save(payMethodToUpdate);
 
@@ -37,7 +40,7 @@ public class PaymentManager implements PaymentService {
 
     @Override
     public void delete(DeletePaymentRequest request) {
-        PaymentMethod payMethodToDelete = paymentRepository.findById(request.getId()).orElseThrow();
+        PaymentMethod payMethodToDelete = paymentRepository.findById(request.getId()).orElseThrow(()-> new RuntimeException("Delete Error : There is no payment with this id!"));
         paymentRepository.delete(payMethodToDelete);
 
     }
@@ -53,5 +56,10 @@ public class PaymentManager implements PaymentService {
                 .stream()
                 .sorted(Comparator.comparing(GetListPaymentResponse::getName))
                 .toList();
+    }
+
+    @Override
+    public PaymentMethod getById(int id) {
+        return paymentRepository.findById(id).orElseThrow(()-> new RuntimeException("There is no payment with this id!"));
     }
 }

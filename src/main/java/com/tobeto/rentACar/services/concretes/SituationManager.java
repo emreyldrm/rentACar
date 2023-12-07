@@ -21,6 +21,10 @@ public class SituationManager implements SituationService {
 
     @Override
     public void add(AddSituationRequest request) {
+        if(situationRepository.existsSituationBySituationName(request.getName())){
+            throw new RuntimeException("Add Error : This situation already exists!");
+        }
+
         Situation situation = new Situation();
         situation.setSituationName(request.getName());
         situationRepository.save(situation);
@@ -29,7 +33,7 @@ public class SituationManager implements SituationService {
 
     @Override
     public void update(UpdateSituationRequest request) {
-        Situation situationToUpdate = situationRepository.findById(request.getId()).orElseThrow();
+        Situation situationToUpdate = situationRepository.findById(request.getId()).orElseThrow(()-> new RuntimeException("Update Error : There is no situation with this id!"));
         situationToUpdate.setSituationName(request.getName());
         situationRepository.save(situationToUpdate);
 
@@ -37,7 +41,7 @@ public class SituationManager implements SituationService {
 
     @Override
     public void delete(DeleteSituationRequest request) {
-        Situation situationToDelete = situationRepository.findById(request.getId()).orElseThrow();
+        Situation situationToDelete = situationRepository.findById(request.getId()).orElseThrow(()-> new RuntimeException("Delete Error : There is no situation with this id!"));
         situationRepository.delete(situationToDelete);
 
     }
@@ -55,5 +59,10 @@ public class SituationManager implements SituationService {
     @Override
     public List<GetListSituationResponse> getAllSituationsDto() {
         return situationRepository.findAllSituationsDto();
+    }
+
+    @Override
+    public Situation getById(int id) {
+        return situationRepository.findById(id).orElseThrow();
     }
 }
