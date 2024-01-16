@@ -24,12 +24,12 @@ public class CustomerManager implements CustomerService {
         if(customerRepository.existsCustomerByMail(request.getMail()))
             throw new RuntimeException("Add Error : Such an email is already registered!");
 
-        Customer customer = new Customer();
-        customer.setFName(request.getFName());
-        customer.setLName(request.getLName());
-        customer.setMail(request.getMail());
-        customer.setLicenseYear(request.getLicenseYear());
-        customerRepository.save(customer);
+//        Customer customer = new Customer();
+//        customer.setFName(request.getFName());
+//        customer.setLName(request.getLName());
+//        customer.setMail(request.getMail());
+//        customer.setLicenseYear(request.getLicenseYear());
+//        customerRepository.save(customer);
 
     }
 

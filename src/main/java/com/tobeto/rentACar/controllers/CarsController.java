@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/cars")
+@CrossOrigin
 public class CarsController {
 
     private final CarService carService;
@@ -52,4 +53,6 @@ public class CarsController {
     private List<GetListCarResponse> getAllCarsDto(){
         return carService.getAllCarsDto();
     }
+    @GetMapping("id")
+    private Car getById(int id){return carService.getById(id);}
 }

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetListCarResponse {
+public class GetCarByIdResponse {
     private int id;
     private int modelYear;
     private String modelName;

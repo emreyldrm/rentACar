@@ -4,6 +4,7 @@ import com.tobeto.rentACar.entities.Car;
 import com.tobeto.rentACar.services.dtos.car.requests.AddCarRequest;
 import com.tobeto.rentACar.services.dtos.car.requests.DeleteCarRequest;
 import com.tobeto.rentACar.services.dtos.car.requests.UpdateCarRequest;
+import com.tobeto.rentACar.services.dtos.car.responses.GetCarByIdResponse;
 import com.tobeto.rentACar.services.dtos.car.responses.GetListCarResponse;
 
 import java.util.List;
@@ -17,5 +18,6 @@ public interface CarService {
     List<GetListCarResponse> getByModelYearDto(int modelYear);
     List<GetListCarResponse> getBySituationDto(String situation);
     List<GetListCarResponse> getAllCarsDto();
+    GetCarByIdResponse getByIdResponse(int id);
     Car getById(int id);
 }

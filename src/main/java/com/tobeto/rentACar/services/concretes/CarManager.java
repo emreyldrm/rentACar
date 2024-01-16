@@ -10,6 +10,7 @@ import com.tobeto.rentACar.services.abstracts.SituationService;
 import com.tobeto.rentACar.services.dtos.car.requests.AddCarRequest;
 import com.tobeto.rentACar.services.dtos.car.requests.DeleteCarRequest;
 import com.tobeto.rentACar.services.dtos.car.requests.UpdateCarRequest;
+import com.tobeto.rentACar.services.dtos.car.responses.GetCarByIdResponse;
 import com.tobeto.rentACar.services.dtos.car.responses.GetListCarResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -75,8 +76,15 @@ public class CarManager implements CarService {
     public List<GetListCarResponse> getAllCarsDto() {
         return carRepository.findAllCarsDto()
                 .stream()
-                .filter(car -> car.getDailyPrice().compareTo(new BigDecimal("1000")) > 0)
+                .filter(car -> car.getDailyPrice().compareTo(new BigDecimal("100")) > 0)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public GetCarByIdResponse getByIdResponse(int id) {
+        Car carById = carRepository.findById(id).orElseThrow(()-> new RuntimeException("Update Error : There is no car with this id!"));
+
+        return null;
     }
 
     @Override

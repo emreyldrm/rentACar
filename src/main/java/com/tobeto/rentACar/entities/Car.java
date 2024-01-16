@@ -27,13 +27,14 @@ public class Car {
     private String color;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_id") //many to one hangi tablodaysan onunla ilgili sütunu belirt.
     private Brand brand;
+
     @ManyToOne
     @JoinColumn(name = "situation_id")
     private Situation situation;
 
-    @OneToMany(mappedBy = "car")
+    @OneToMany(mappedBy = "car")// one to many List<>, mappedBy =>
     @JsonIgnore
     private List<Rent> rents;
 }
